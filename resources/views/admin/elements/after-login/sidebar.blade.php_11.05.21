@@ -1,0 +1,399 @@
+<!-- Main Sidebar Container -->
+@php
+
+@endphp
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{route('admin.dashboard')}}" class="brand-link">
+        <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" alt="User Logo"
+             class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin Panel</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
+                     alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">Admin</a>
+            </div>
+        </div> -->
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview @if(Route::currentRouteName()=='admin.dashboard'){{'menu-open'}}@endif">
+                    <a href="{{ route('admin.dashboard') }}"
+                       class="nav-link @if(Route::currentRouteName()=='admin.dashboard' 
+                       || Route::currentRouteName()=='admin.settings' 
+                       ){{'active'}}@endif">
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>
+                            Home
+                            <i class="right fas"></i>
+                        </p>
+                    </a>
+                    <?php /*<ul class="nav nav-treeview @if(Route::currentRouteName()=='admin.dashboard' 
+                    || Route::currentRouteName()=='admin.settings'){{'style="display: block;"'}}@endif">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.dashboard') }}"
+                               class="nav-link @if(Route::currentRouteName()=='admin.dashboard'){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings') }}"
+                               class="nav-link @if(Route::currentRouteName()=='admin.settings'){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Settings</p>
+                            </a>
+                        </li>
+                        
+                    </ul>*/ ?>
+                </li>
+                
+                <li class="nav-item has-treeview @if(
+                            Route::currentRouteName()=='admin.user-management.site.user.list'||
+                            Route::currentRouteName()=='admin.user-management.user-detail'){{'menu-open'}}@endif">
+                    <a href="#"
+                    class="nav-link @if(Route::currentRouteName()=='admin.user-management.user-detail' ||
+                                      
+                                        Route::currentRouteName()=='admin.user-management.site.user.list'){{'active'}}@endif">
+                        <i class="nav-icon fa fa-users"></i>
+                        <p>
+                            User
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    
+                    <ul class="nav nav-treeview" @if(Route::currentRouteName()=='admin.user-management.site.user.list' ||
+                                   
+                                    Route::currentRouteName()=='admin.user-management.user-detail')
+                                    style="display: block;"
+                                    @endif>
+                        
+
+                            <?php /*<li class="nav-item">
+                            <a href="{{route('admin.user-management.user.add')}}"
+                             class="nav-link @if( \Route::currentRouteName()=='admin.user-management.user.add'){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Admin Create</p>
+                            </a>
+                        </li> 
+             
+                         <li class="nav-item">
+                            <a href="{{route('admin.user-management.user.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.user-management.user.list' 
+                                        ||(Route::currentRouteName()=='admin.user-management.user-edit' && isset($details->usertype) && $details->usertype != 'FU')
+                                      ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Admin List</p>
+                            </a>
+                        </li>*/ ?>
+                        
+                        <li class="nav-item">
+                            <a href="{{route('admin.user-management.site.user.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.user-management.site.user.list' 
+                                        || (Route::currentRouteName()=='admin.user-management.user-detail')
+                                        ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> App Member List</p>
+                            </a>
+                        </li> 
+                    </ul>
+                </li>
+               
+                <li class="nav-item has-treeview @if(
+                            Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit'
+                            ){{'menu-open'}}@endif">
+                    <a href="#"
+                    class="nav-link @if(Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit'){{'active'}}@endif">
+                    <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                        Ice-breaking Questions
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    
+                    <ul class="nav nav-treeview" @if(Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit')
+                                    style="display: block;"
+                                    @endif>
+                        
+
+                        <li class="nav-item">
+                            <a href="{{route('admin.icebreak.ib.category.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit') {{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Category List</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="{{route('admin.icebreak.ib.icebreak.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit') {{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Question List</p>
+                            </a>
+                        </li> 
+                    </ul>
+                </li>
+               
+                <li class="nav-item has-treeview @if(
+                            Route::currentRouteName()=='admin.restaurant.restaurant-list' ||
+                            Route::currentRouteName()=='admin.restaurant.restaurant-add' ||
+                            Route::currentRouteName()=='admin.restaurant.restaurant-edit' 
+                            ){{'menu-open'}}@endif">
+                    <a href="{{route('admin.restaurant.restaurant-list')}}"
+                    class="nav-link @if(Route::currentRouteName()=='admin.restaurant.restaurant-list' ||
+                            Route::currentRouteName()=='admin.restaurant.restaurant-add' ||
+                            Route::currentRouteName()=='admin.restaurant.restaurant-edit'){{'active'}}@endif">
+                    <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                           Restaurant
+                            
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview @if(
+                            Route::currentRouteName()=='admin.question.question-list' ||
+                            Route::currentRouteName()=='admin.question.question-add' ||
+                            Route::currentRouteName()=='admin.question.question-view' 
+                            ){{'menu-open'}}@endif">
+                    <a href="{{route('admin.question.question-list')}}"
+                    class="nav-link @if(Route::currentRouteName()=='admin.question.question-list' ||
+                            Route::currentRouteName()=='admin.question.question-add' ||
+                            Route::currentRouteName()=='admin.question.question-view'){{'active'}}@endif">
+                    <i class="nav-icon fas fa-bars"></i>
+                        <p>
+                            Question/ Answer
+                            
+                        </p>
+                    </a><?php /**/ ?>
+                    
+                    <?php /*<ul class="nav nav-treeview" @if(Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit' ||
+                            Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit')
+                                    style="display: block;"
+                                    @endif>
+                        
+
+                        <li class="nav-item">
+                            <a href="{{route('admin.icebreak.ib.category.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.icebreak.ib.category.list' ||
+                            Route::currentRouteName()=='admin.icebreak.category-add' ||
+                            Route::currentRouteName()=='admin.icebreak.category-edit') {{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Category List</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="{{route('admin.icebreak.ib.icebreak.list' )}}"
+                             class="nav-link @if(Route::currentRouteName()=='admin.icebreak.ib.icebreak.list'||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-add' ||
+                            Route::currentRouteName()=='admin.icebreak.icebreak-edit') {{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Question List</p>
+                            </a>
+                        </li> 
+                    </ul><?php */ ?>
+                </li>
+
+                
+
+<?php /* ?>
+        <!-- project management-->
+        <li class="nav-item has-treeview @if( 
+                    Route::currentRouteName()=='admin.project.index'||
+                    Route::currentRouteName()=='admin.project.add'||
+                    Route::currentRouteName()=='admin.project.edit' 
+                
+                
+                    ){{'menu-open'}}@endif">
+            <a href="#"
+            class="nav-link @if( 
+                                Route::currentRouteName()=='admin.project.index'||
+                                Route::currentRouteName()=='admin.project.add' ||
+                                Route::currentRouteName()=='admin.project.edit' 
+                                ){{'active'}}@endif">
+                <i class="nav-icon fas fa-file-alt fa-lg"> </i>
+                <p>
+                Project Management
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview @if(Route::currentRouteName()=='admin.project.index' ||
+                                            Route::currentRouteName()=='admin.project.add' ||
+                                            Route::currentRouteName()=='admin.project.edit'
+                                            
+                        ){{'style="display: block;"'}}@endif">
+                
+                
+                <li class="nav-item">
+                    <a href="{{route('admin.project.index' )}}"
+                    class="nav-link @if(Route::currentRouteName()=='admin.project.index' ||
+                                       
+                                        Route::currentRouteName()=='admin.project.edit'
+                                
+                                ){{'active'}}@endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Project List</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.project.add' )}}"
+                    class="nav-link @if(
+                                        Route::currentRouteName()=='admin.project.add' 
+                                
+                                ){{'active'}}@endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Project Add</p>
+                    </a>
+                </li>
+                
+                </ul>
+                </li>
+                
+                <!-- project service management-->
+                <li class="nav-item has-treeview @if( 
+                            Route::currentRouteName()=='admin.projectservices.index'||
+                            Route::currentRouteName()=='admin.projectservices.add'||
+                            Route::currentRouteName()=='admin.projectservices.edit' 
+                        
+                        
+                            ){{'menu-open'}}@endif">
+                    <a href="#"
+                    class="nav-link @if( 
+                                        Route::currentRouteName()=='admin.projectservices.index'||
+                                        Route::currentRouteName()=='admin.projectservices.add' ||
+                                        Route::currentRouteName()=='admin.projectservices.edit' 
+                                        ){{'active'}}@endif">
+                        <i class="nav-icon fas fa-file-alt fa-lg"> </i>
+                        <p>
+                        Project Service
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview @if(Route::currentRouteName()=='admin.projectservices.index' ||
+                                                    Route::currentRouteName()=='admin.projectservices.add' ||
+                                                    Route::currentRouteName()=='admin.projectservices.edit'
+                                                    
+                                ){{'style="display: block;"'}}@endif">
+                        
+                        
+                        <li class="nav-item">
+                            <a href="{{route('admin.projectservices.index' )}}"
+                            class="nav-link @if(Route::currentRouteName()=='admin.projectservices.index' ||
+                                               
+                                                Route::currentRouteName()=='admin.projectservices.edit'
+                                        
+                                        ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Service List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.projectservices.add' )}}"
+                            class="nav-link @if(
+                                                Route::currentRouteName()=='admin.projectservices.add' 
+                                        
+                                        ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Service Add</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <!-- -->
+
+                <!-- project near place management-->
+                <li class="nav-item has-treeview @if( 
+                            Route::currentRouteName()=='admin.projectnear.index'||
+                            Route::currentRouteName()=='admin.projectnear.add'||
+                            Route::currentRouteName()=='admin.projectnear.edit' 
+                        
+                        
+                            ){{'menu-open'}}@endif">
+                    <a href="#"
+                    class="nav-link @if( 
+                                        Route::currentRouteName()=='admin.projectnear.index'||
+                                        Route::currentRouteName()=='admin.projectnear.add' ||
+                                        Route::currentRouteName()=='admin.projectnear.edit' 
+                                        ){{'active'}}@endif">
+                        <i class="nav-icon fas fa-file-alt fa-lg"> </i>
+                        <p>
+                        Project Near Place
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview @if(Route::currentRouteName()=='admin.projectnear.index' ||
+                                                    Route::currentRouteName()=='admin.projectnear.add' ||
+                                                    Route::currentRouteName()=='admin.projectnear.edit'
+                                                    
+                                ){{'style="display: block;"'}}@endif">
+                        
+                        
+                        <li class="nav-item">
+                            <a href="{{route('admin.projectnear.index' )}}"
+                            class="nav-link @if(Route::currentRouteName()=='admin.projectnear.index' ||
+                                               
+                                                Route::currentRouteName()=='admin.projectnear.edit'
+                                        
+                                        ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Place List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.projectnear.add' )}}"
+                            class="nav-link @if(
+                                                Route::currentRouteName()=='admin.projectnear.add' 
+                                        
+                                        ){{'active'}}@endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Place Add</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li><?php */ ?>
+                <!-- -->
+
+
+            </ul>
+
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

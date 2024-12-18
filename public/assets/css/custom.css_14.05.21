@@ -1,0 +1,103 @@
+/* login page start */
+body { overflow-x: hidden; }
+body.login-page { background-color: #f5eee7; }
+.login-page .login-logo img { height: 70px; }
+
+.login-page .btn-signin { background-color: #EF9785; color: #fff; font-weight: bold; padding: 10px 20px; border-radius: 30px;}
+.login-page .btn-signin:hover {background-color: #F5EDE7; color: #B55854;}
+
+.login-page .icheck-primary label { font-weight: normal; } 
+
+.login-page .link {color: #B55854;}
+.login-page .link:hover { text-decoration: underline; }
+
+.login-page .fa-envelope::before, .login-page .fa-lock::before { color: #EF9785; }
+
+/* login page end */
+
+
+
+/* sidebar start */
+
+.main-sidebar.sidebar-dark-primary { background-color: #ea9b8b; }
+
+.main-sidebar .brand-link, .main-sidebar .user-panel { border-bottom: 1px solid #f5cac2; }
+
+.main-sidebar .nav-treeview > .nav-item > .nav-link, .main-sidebar .sidebar a, .main-sidebar .brand-link { color: #fff!important; }
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active { background-color: #f5eee7; color: #e28776!important; }
+.main-sidebar .nav-treeview>.nav-item>.nav-link.active {background-color: #f5cac2!important;}
+
+.nav-sidebar > .nav-item > .nav-treeview { margin-left: 15px;}
+/* sidebar end */
+
+/* header start */
+.main-header { background-color: #f5cac2; }
+.main-header .dropdown-menu {background-color: #f5cac2; }
+.main-header .dropdown-menu .dropdown-item { overflow: hidden;  border-bottom: 1px solid #d2a79f; padding: 5px 10px; }
+.main-header .dropdown-menu .dropdown-item:last-child { border-bottom: 0px; }
+.main-header .dropdown-menu .dropdown-item:hover { background-color: transparent; }
+.main-header .dropdown-menu .dropdown-item span.text-muted {font-size: 15px!important; color: #333!important;}
+.main-header .dropdown-menu .dropdown-item:hover span.text-muted {color: #000!important;}
+
+/* header end */
+
+.main-footer {color: #b55854;  background-color: #f5eee7; }
+.main-footer a {color: #b55854; }
+
+
+.card-primary:not(.card-outline)>.card-header { background-color: #f5eee7; color: #b55854;}
+.thead-default { background-color: #f5eee7!important; color: #b55854;}
+.card-primary:not(.card-outline) > .card-header, .card-primary:not(.card-outline) > .card-header a {color: #b55854!important;}
+.card-header h3.card-title a { margin-left: 10px; }
+
+.page-item.active .page-link { background-color: #ea9b8b;  border-color: #ea9b8b;}
+.page-link {color: #ea9b8b;}
+.page-link:hover { color: #ea9b8b;}
+
+.dataTables_wrapper .col-sm-12 { overflow-x: auto; }
+
+.bg-one { background-color: #f1b3a6; }
+.bg-two { background-color: #f5cac2; }
+.bg-three { background-color: #fadcd7; }
+
+.small-box .icon > i { color: #c1877b; font-size: 60px!important; }
+.small-box > .small-box-footer { color: #000; }
+
+.content-header .breadcrumb .breadcrumb-item a {color: #b55854;}
+
+
+.btn-red { background-color: #EF9785; color: #fff; font-weight: bold; padding: 10px 20px; border-radius: 30px;}
+.btn-red:hover {background-color: #F5EDE7; color: #B55854;}
+
+.btn-yellow { background-color: #F5EDE7; color: #B55854; font-weight: bold; padding: 10px 20px; border-radius: 30px;}
+.btn-yellow:hover {background-color: #EF9785; color: #fff;}
+
+.back_new { margin-right: 10px; }
+
+
+#addtion .form-group { position: relative; padding-right: 35px; }
+
+#addtion .form-group .removeAnswer { position: absolute; top: 2px; right: 0; color: #EF9785; font-size: 25px;  }
+
+.footer-btn { padding-top: 15px; }
+
+.upload-pic { object-fit: cover; object-position: center; }
+
+
+.table-striped tbody tr:nth-of-type(2n+1) { background-color: #fff; }
+table.table-bordered.dataTable tbody td img{ width: 80px; height: 50px; object-fit: cover; object-position: center; }
+
+
+@media (max-width: 575px) {
+
+.content-header h1 { margin-bottom: 10px!important; }
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination { justify-content: center!important; margin-top: 10px!important; }
+
+.main-footer { text-align: center; }
+
+.upload-pic { margin-top: 10px; }
+
+.login-page, .register-page { justify-content: flex-start; padding-top: 80px; }
+
+}
