@@ -174,9 +174,9 @@ div.dataTables_wrapper div.dataTables_processing {
 
               <li class="nav-item">
 
-                    <a href="{{route('admin.project-management.project-list' )}}" class="nav-link @if(Route::currentRouteName()=='admin.project-management.project-list')
+                    <a href="{{route('admin.order-management.coupon-list' )}}" class="nav-link @if(Route::currentRouteName()=='admin.order-management.coupon-list')
 
-                    ){{'active'}}@endif">Coupon</a>
+                    ){{'active'}}@endif">Coupon List</a>
 
               </li>
 

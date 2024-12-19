@@ -34,17 +34,6 @@ use Carbon\Carbon;
 use Redirect;
 use Webp;
 use Yajra\Datatables\Datatables;
-use App\Models\User;
-// use App\Models\Project;
-// use App\Models\Gallery;
-// use App\Models\CampainStage;
-// use App\Models\CampainType;
-// use App\Models\Domain;
-// use App\Models\DoubleDonation;
-// use App\Models\Payment;
-// use App\Models\Donation;
-
-use Illuminate\Support\Facades\Log;
 use Exception;
 
 
@@ -62,11 +51,9 @@ class OrderController extends Controller
 	{
 		$this->data['page_title']="Order List";
         $this->data['panel_title']="Order List";
-        $data1 = DB::table('store_orders')->orderBy('order_id', 'desc')->where('order_id',29055)->first();
-
-       // dd(unserialize($data->promotions));
+        $data1 = DB::table('store_orders')->orderBy('order_id', 'desc')->where('order_id',29083)->first();
+        $deserialize_data = unserialize($data1->promotions);
         return view('admin.ordermanagement.order-list',$this->data);
-
 
 	}
 	public function OrderListTable(Request $request)
@@ -77,6 +64,7 @@ class OrderController extends Controller
         ->select(
             'store_orders.order_id as order_number',
             'store_orders.discount',
+            'store_orders.promotions',
             DB::raw("CONCAT(store_orders.firstname, ' ', store_orders.lastname) as name"),
             'store_orders.total as order_total',
             'store_orders.promotion_ids',
@@ -115,6 +103,15 @@ class OrderController extends Controller
                 return $model->order_total;
             })
             ->addColumn('discount', function ($model){
+                //unserialize($model->promotions);
+               // $deserialize_data = unserialize($model->promotions);
+                // if(isset($deserialize_data[$model->promotion_ids])){
+                //     if(isset($deserialize_data[$model->promotion_ids]['total_discount'])){
+                //         return $deserialize_data[$model->promotion_ids]['total_discount'];
+                //     }
+                //     return 0;
+                // }
+                // return 0;
                 return $model->discount;
             })
             ->addColumn('coupon', function ($model){
@@ -130,38 +127,56 @@ class OrderController extends Controller
             
             return $finalResponse;
 	}
-    public function DonationReminderMail(Request $request,$encryptCode)
-    {
-        
-        $donationId=decrypt($encryptCode, Config::get('Constant.ENC_KEY'));
-        $donation = Donation::where('id',$donationId)->get()->toArray();
-        $donation=$donation['0'];
-        $project=Project::where('id',$donation['project_id'])->get()->toArray();
-        $project=$project['0'];
-        date_default_timezone_set("Europe/Paris");
-        $timeDate=date('d/m',strtotime($donation['created_at']));
-        $timeHours=date('H',strtotime($donation['created_at']));
-        $timemins=date('i',strtotime($donation['created_at']));
-        $t=($timeHours>0?$timeHours.'h':'');
-        $t=$t.$timemins;
-        $link=url('donation').'/'.encrypt($donation['project_id'], Config::get('Constant.ENC_KEY'));
+    public function CouponList(Request $request)
+	{
+		$this->data['page_title']="Coupon List";
+        $this->data['panel_title']="Coupon List";
+       // dd(unserialize($data->promotions));
+        return view('admin.ordermanagement.coupon-list',$this->data);
 
+	}
+    public function CouponDetails(Request $request)
+	{
+        DB::enableQueryLog();
+        $query = DB::table('store_orders')
+        ->join('store_promotion_descriptions', 'store_orders.promotion_ids', '=', 'store_promotion_descriptions.promotion_id')
+        ->select(
+            'store_promotion_descriptions.name as coupon_name',
+            DB::raw('SUM(store_orders.total) as order_total'),
+            DB::raw('COUNT(store_orders.order_id) as order_count') 
+        );
+       // Apply date range filter
+       if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
 
+            // Convert the date inputs to timestamps if needed
+            $start_timestamp = strtotime($start_date . ' 00:00:00');
+            $end_timestamp = strtotime($end_date . ' 23:59:59');
 
-        
-        $fromUser = Config::get('yourdata.admin_email_from');
-        $toUser = $donation['contact_email'];
-        //$toUser = 'vishakha@matrixnmedia.com';
-        $subject = 'Incident CB sur don / Fonds Fraternité pour Demain';
-        $replyTo = Config::get('yourdata.reply_to_donation_payment');
-        $mailData = array('first_name' => $donation['contact_first_name'], 'last_name' => $donation['contact_last_name'], 'email' => $donation['contact_email'], 'project_title' => $project['project_title'],'timedate'=>$timeDate,'timemins'=>$t,'link'=>$link);
-        Mail::send('email.payment_retry_reminder', $mailData, function ($sent) use ($toUser, $fromUser, $subject, $replyTo) {
-                $sent->from($fromUser)->subject($subject);
-                $sent->replyTo($replyTo);
-                $sent->to($toUser);
-            });
-        die;
-    }
+            // Apply date range filter
+            $query->whereBetween('store_orders.timestamp', [$start_timestamp, $end_timestamp]);
+        }
+        $data = $query->whereNotNull('store_orders.promotion_ids')
+                    ->groupBy('store_promotion_descriptions.name', 'store_promotion_descriptions.promotion_id') 
+                    ->get(); 
+        //dd(DB::getQueryLog());
+			
+		$finalResponse= Datatables::of($data)
+            ->addColumn('coupon_name', function ($model){
+                return $model->coupon_name;
+            })
+            ->addColumn('total', function ($model){
+                return $model->order_total;
+            })
+            ->addColumn('order_count', function ($model){
+                return $model->order_count;
+            })
+            ->rawColumns(['coupon_name','total','order_count'])
+            ->make(true);
+            
+            return $finalResponse;
+	}
     public function human_time_diff( $from, $to = 0 ) {
         if ( empty( $to ) ) {
             $to = time();

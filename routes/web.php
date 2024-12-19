@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth:admin','as' => 'admin.'], function () {
     Route::group(['prefix' => 'order-management', 'as' => 'order-management.'], function () {
         Route::get('/order-list', 'App\Http\Controllers\admin\OrderController@OrderList')->name('order-list');
         Route::get('/order-list-table', 'App\Http\Controllers\admin\OrderController@OrderListTable')->name('order-list-table');
+        Route::get('/coupon-list', 'App\Http\Controllers\admin\OrderController@CouponList')->name('coupon-list');
+        Route::get('/coupon-list-table', 'App\Http\Controllers\admin\OrderController@CouponDetails')->name('coupon-list-table');
     });
     // Route::get('/dashboard', 'App\Http\Controllers\admin\BookingController@theCalendar')->name('dashboard');
     Route::any('/settings', 'App\Http\Controllers\admin\DashboardController@settings')->name('settings');

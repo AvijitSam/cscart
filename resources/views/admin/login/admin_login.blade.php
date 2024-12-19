@@ -8,11 +8,11 @@
 
 <div class="login-box">
 
-  <div class="login-logo">
- <img src="{{ asset('/assets') }}/images/logo.svg" height="150" width="150" alt="">
-   <!-- Bio Tout Court-->
+  {{-- <div class="login-logo">
+    <img src="{{ asset('/assets') }}/images/logo.svg" height="150" width="150" alt="">
+    <!-- Bio Tout Court-->
 
-  </div>
+  </div> --}}
 
   <!-- /.login-logo -->
 

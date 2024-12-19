@@ -14,14 +14,14 @@
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1 class="m-0 text-dark">Order List 
+               <h1 class="m-0 text-dark">Coupon List 
                </h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                  <li class="breadcrumb-item active"> Order List</li>
+                  <li class="breadcrumb-item active"> Coupon List</li>
                </ol>
             </div>
             <!-- /.col -->
@@ -46,6 +46,7 @@
                            >+ Ajouter un client</a> -->
                      </h3>
                   </div>
+                  <!-- /.card-header -->
                   <div class="card-body">
                      @if(count($errors) > 0)
                      <div class="alert alert-danger alert-dismissable">
@@ -76,29 +77,31 @@
                     
                         <button id="filter-date" class="btn btn-primary">Filter</button>
                     </div>
-
                      <table class="table table table-bordered table-striped" id="site-donation-table">
                         <thead>
                            <tr>
                               <th>Sl.No</th>
-                              <th>Order Id</th>
-                              <th>Name</th>
-                              <th>Coupon</th>
+                              <th>Coupon Name</th>
                               <th>Total</th>
-                              <th>Discount</th>
-                              <th>Date</th>
+                              <th>Order Count</th>
                            </tr>
                         </thead>
                         <tbody></tbody>
                      </table>
                   </div>
+                  <!-- /.card-body -->
                </div>
                <!-- /.card -->
             </div>
+            <!-- /.col -->
          </div>
-        
+         <!-- /.row -->
+         <!-- Main row -->
          <div class="row">
-         
+            <!-- Left col -->
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <!-- right col -->
          </div>
          <!-- /.row (main row) -->
       </div>
@@ -123,31 +126,35 @@
         todayHighlight: true
       });
       $("body").on("click",".trigger-reminder",function(e){
-      e.preventDefault();
-      var url=$(this).attr("href");
-      $.get(url, function(data, status){
-         alert("Un rappel a été envoyé avec succès");
-      });
-      return false;
+         e.preventDefault();
+         var url=$(this).attr("href");
+         $.get(url, function(data, status){
+            alert("Un rappel a été envoyé avec succès");
+         });
+         return false;
       });
       oTable = $('#site-donation-table').DataTable({
+
          "aaSorting": [],
          "pageLength": 10,
+
          processing: true,
          "iDisplayLength": 50,
+
          "language": {
+         // url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json',
+
          processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '},
 
          serverSide: true,
 
          ajax: {
 
-            url: "{!! route('admin.order-management.order-list-table'); !!}",
+            url: "{!! route('admin.order-management.coupon-list-table'); !!}",
 
             data: function (d) {
                d.start_date = $('#start_date').val();
                d.end_date = $('#end_date').val();
-
             }
 
          },
@@ -156,12 +163,9 @@
             {data: null, name: 'serial', render: function (data, type, row, meta) {
                return meta.row + 1 + meta.settings._iDisplayStart;
             }},
-            {data: 'orderid', name: 'orderid'},
-            {data: 'name', name: 'name'},
-            {data: 'coupon', name: 'coupon'},
+            {data: 'coupon_name', name: 'coupon_name'},
             {data: 'total', name: 'total'},
-            {data: 'discount', name: 'discount'},
-            {data: 'purchase_date', name: 'purchase_date'},
+            {data: 'order_count', name: 'order_count'}
          ],
 
          drawCallback: function () {
